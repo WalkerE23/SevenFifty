@@ -1,2 +1,2 @@
 # SevenFifty
-interview for SevenFifty. Email validation service
+Interview Coding Challenge for SevenFifty. Email validation service
