@@ -1,0 +1,30 @@
+
+
+<!-- public/index.html -->
+<!doctype html>
+<html lang="en" ng-app='SevenFifty'>
+<head>
+    <meta charset="UTF-8">
+    <base href="/">
+
+    <title>SevenFifty</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- JS -->
+    <script src="libs/angular/angular.min.js"></script>
+    <script src="libs/angular-route/angular-route.min.js"></script>
+
+    <!-- ANGULAR CUSTOM -->
+    <script src="js/controllers/CustomerCtrl.js"></script>
+    <script src="js/services/CustomerService.js"></script>
+    <script src="js/controllers/AdminCtrl.js"></script>
+    <script src="js/services/AdminService.js"></script>
+    <script src="js/appRoutes.js"></script>
+    <script src="js/app.js"></script>
+</head>
+<body>
+    <div ng-view></div>
+</body>
+</html>

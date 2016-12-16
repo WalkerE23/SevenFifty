@@ -1,0 +1,32 @@
+<div data-ng-init="init()">
+	<div>
+		<form ng-sumbit="addNewDomainName()">
+			<input type="text" placeholder="Add New Domain" ng-model="newDomain">
+			<button type="submit">Add</button>	
+		</form>
+		
+
+		<input type="text" placeholder="Search Domains" ng-model="domainFilter">
+		<div class="scrollableTable">
+			<table>
+				<tr ng-repeat="domain in domainsList|filter:domainFilter">
+					<td>{{domain.name}}</td>
+					<td><button ng-click="removeThisDomain(domain)">-</button></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<div>
+		<input type="text" placeholder="Search Domains" ng-model="wholesalerFilter">
+		<div class="scrollableTable">
+			<table>
+				<tr ng-repeat="wholesaler in wholesalerList|filter:wholesalerFilter">
+					<td>{{wholesaler.firstName}}</td>
+					<td>{{wholesaler.lastName}}</td>
+					<td>{{wholesaler.email}}</td>
+				</tr>
+			</table>
+		</div>
+		
+	</div>
+</div>
