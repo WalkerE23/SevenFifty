@@ -11,7 +11,7 @@ module.exports = function(app) {
 
 
 
-    app.get('/api/retrieveWholesalers',Admin.showAllWholesalers);
+    app.get('/api/retrieveBuyers',Admin.showAllBuyers);
     app.get('/api/retrieveBlacklist', Admin.showAllBlacklist);
     app.put('/api/addDomain',Admin.addToBlacklist);
     app.delete('/api/removeDomain',Admin.removeFromBlacklist);

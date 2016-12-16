@@ -8,7 +8,6 @@ $routeProvider
         templateUrl: 'views/customerUI.html',
         controller: 'CustomerController'
     })
-
     .when('/admin', {
         templateUrl: 'views/adminUI.html',
         controller: 'AdminController'

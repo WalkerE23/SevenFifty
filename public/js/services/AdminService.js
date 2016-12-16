@@ -3,48 +3,66 @@ angular.module('AdminService', []).factory('Admin', ['$http', function($http) {
     return {
         addDomain : function(domainName) {
             var dataObj = {domain:domainName}
-            $http.put('/api/addDomain',dataObj)
-            .then(function success(response){
-
-
-            }, function failure(err){
-                console.log(err);
-            })
+            return $http.put('/api/addDomain',dataObj)
+            .then(function(response){
+                if(response.data.success){
+                    return true;
+                }
+                else{
+                    console.log(response.error);
+                    return false;
+                }
+            });
         },
-        removeDomain: function(domainName){
+
+        removeDomain: function(domainObj){
             //did this a slightly different way to allow clean passage of delete method with body
             return $http({
                 url: '/api/removeDomain',
                 method: 'DELETE',
-                data: {
-                    domain: domainName
-                },
+                data:domainObj,
                 headers: {
                     "Content-Type": "application/json;charset=utf-8"
                 }
             }).then(function(response) {
-
-            }, function(error) {
-                console.log(error);
+                if(response.data.success){
+                    return true;
+                }
+                else{
+                    console.log(response.error);
+                    return false;
+                }
             });
         },
 
-        getAllWholesalers : function() {
-            return $http.get('/api/retrieveWholesalers')
-            .then(function success(response){
-                return response.data
-            },function failure(err){
-                return err;
+        getAllBuyers : function() {
+            return $http.get('/api/retrieveBuyers')
+            .then(function(response){
+                if(response.data.success){
+                    return response.data.data;
+                }
+                else{
+                    return response.data.error
+                }
             });
         },
         getAllBlacklistDomains : function(){
             return $http.get('/api/retrieveBlacklist')
-            .then(function success(response){
-                return response.data;
-            },function failure(err){
-                return err;
+            .then(function(response){
+                if(response.data.success){
+                    return response.data.data;
+                }
+                else{
+                    return response.data.error
+                }
             });
-        }
-    }        
+        },
+
+        checkDomainFormat : function(domain) {
+            //is the email in the correct format in the first place?
+            var regexTest = /\S+\.\S+/i;
+            return regexTest.test(domain);
+        }   
+    };
 
 }]);

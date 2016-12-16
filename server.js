@@ -6,6 +6,8 @@ var bodyParser     = require('body-parser');
 var methodOverride = require('method-override');
 var morgan = require("morgan");
 
+
+
 // ----init---
 var port = process.env.PORT || 8080; //so that we dont necessarily have to hard code it. 
 
@@ -18,10 +20,6 @@ app.use(express.static(__dirname + '/public'));
 
 //----logging------
 app.use(morgan('dev'));
-
-// ---DB----
-var db = require('./config/db');
-// mongoose.connect(db.url);
 
 // ---set up api router---
 require('./app/routes')(app); // defer to this file for app routes

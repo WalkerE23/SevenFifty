@@ -1,32 +1,33 @@
 
 angular.module('CustomerCtrl', []).controller('CustomerController', function($scope,Customer) {
 
-	$scope.status_msg = "";
+	updateStatusMessage(0);
 
     $scope.signup = function(){
     	if($scope.email && $scope.firstn && $scope.lastn){
     		email = $scope.email;
     		if(Customer.checkEmailFormat(email)){
     			//email in the right format
-    			if(Customer.isEmailValid(email)){
-    				//vailid: has not been used before, and is not on the blacklist
-    				//sign them up!!
-    				if(Customer.addCustomer($scope.firstn,$scope.lastn,$scope.email)){
-    					//success!!!
-    					updateStatusMessage(5);
-    				}
-    				else{
-    					updateStatusMessage(4);
-    				}
-    			}
-    			else{
-    				updateStatusMessage(3);
-    			}
+                Customer.isEmailValid(email).then(function(validated){
+                    if(validated.success){
+                        console.log("Validated: " + JSON.stringify(validated));    
+                        Customer.addCustomer($scope.firstn,$scope.lastn,$scope.email).then(function(added){
+                            if(added){
+                                successMessage($scope.firstn,$scope.lastn,$scope.email);
+                            }
+                            else{
+                                updateStatusMessage(4);
+                            }
+                        })
+                    }
+                    else{
+                        updateStatusMessage(3);
+                    }
+                })
     		}
     		else{
     			updateStatusMessage(2);
     		}
-    		$scope.status_msg = ""
     	}
     	else{
     		updateStatusMessage(1);
@@ -39,20 +40,24 @@ angular.module('CustomerCtrl', []).controller('CustomerController', function($sc
     			$scope.status_msg = "";
     			break;
     		case 1:
-    			$scope.status_msg = "fill in everything";
+    			$scope.status_msg = "Please fill in every field in order to get started.";
     			break;
     		case 2:
-    			$scope.status_msg = "email not properly formatted";
+    			$scope.status_msg = "The email you entered was not formatted properly. Please check for typos!";
     			break;
     		case 3:
-    			$scope.status_msg = "email NOT VALID";
+    			$scope.status_msg = "Please contact your manager about getting access to a corporate SevenFifty profile for wholesalers.";
     			break;
 			case 4:
-				$scope.status_msg = "something went wrong with signing up, check with yadda yadda";
+				$scope.status_msg = "Something went wrong when signing you up. Please contact SevenFifty, or try back later!";
 				break;
-			case 5:
-    			$scope.status_msg = "Success! You have been added.";
-    			break;
     	}
     }
+    function successMessage(fn,ln,em){
+        var el = document.getElementById("status_msg");
+        el.style.color = "green";
+        $scope.status_msg = "Congrats, " +fn + " " + ln + " for signing up as a SevenFifty buyer. You are registered under " + em + "."
+    }
 });
+
+

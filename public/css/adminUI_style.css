@@ -1,0 +1,100 @@
+#container{
+	width: 100%;
+	position: fixed;
+	top: 50px;
+}
+.adminComponent{
+	position: relative;
+	display: inline-block;
+	width: 40%;
+	height: 600px;
+
+	vertical-align: top;
+
+
+	background-color: #e7f0fe;
+	border:2px solid  #063c93;
+	border-radius: 5px;
+}
+
+.component_head{
+	height: 80px;
+}
+
+.left_component{
+	margin-left: 8%;
+}
+
+.right_component{
+	margin-right: 8%;
+}
+table{
+	width: 100%;
+	margin-top: 5px;
+	padding-top: 5px;
+	border-top: 1px solid  #063c93;
+	overflow: auto;
+}
+td{
+	text-align: left;
+	width: 30%;
+}
+.email{
+	text-align: right;
+	width: 40%;
+}
+
+.admin_input{
+	margin-left: 10%;
+	margin-top: 1%;
+	width: 70%;
+	height: 30px;
+	font-size: 15px;
+	color:#063c93;
+	text-align: center;
+	border-radius:5px;
+    border:1px solid  #063c93;
+    outline:0;
+    -webkit-appearance:none;
+}
+
+#add_button{
+	width: 10%;
+	height: 30px;
+	font-size: 15px;
+	border-radius:5px;
+    border:1px solid  #063c93;
+    background-color: transparent;
+    outline:0;
+}
+#add_button:hover{
+	background-color: #063c93;
+	color: white;
+	transition:0.6s;
+	outline: 0;
+}
+.removedomain_cont{
+	text-align: right;
+}
+
+.removedomain_button{
+	width: 20px;
+	height: 20px;
+	color: #063c93;
+	font-weight: bolder;
+	border:1px solid  #063c93;
+	background: transparent;
+	outline: none;
+}
+.removedomain_button:active{
+	background-color: #063c93;
+}
+
+#vb_title{
+	padding-top: 7px;
+	padding-bottom: 2px;
+	width: 100%;
+	text-align: center;
+}
+
+

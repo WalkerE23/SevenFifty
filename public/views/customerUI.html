@@ -1,15 +1,27 @@
 
+<link rel="stylesheet" href="../css/customerUI_style.css">
 
-<div class="login_container">
+<div id="signup_container">
+	<div id="signup_title">
+		Welcome New Buyers
+	</div>
 	<div>
 		<form ng-submit="signup()">
-			<input type="text" placeholder="First Name" ng-model="firstn">
-			<input type="text" placeholder="Last Name" ng-model="lastn">
-			<input type="text" placeholder="Email" ng-model="email">
-			<button id="signup_submit"type="submit">
-				Submit
-			</button>
+			<div class="form_row">
+				<input type="text" placeholder="First Name" ng-model="firstn" class="form_input">	
+			</div>
+			<div class="form_row">
+				<input type="text" placeholder="Last Name" ng-model="lastn" class="form_input">	
+			</div>
+			<div class="form_row">
+				<input type="text" placeholder="Email" ng-model="email" class="form_input">	
+			</div>
+			<div class="">
+				<button id="signup_submit"type="submit" class="form_submit">Submit</button>	
+			</div>
 		</form>
+	</div>
+	<div id="status_msg">
 		{{status_msg}}
 	</div>
 	
