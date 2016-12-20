@@ -9,16 +9,20 @@ angular.module('CustomerCtrl', []).controller('CustomerController', function($sc
     		if(Customer.checkEmailFormat(email)){
     			//email in the right format
                 Customer.isEmailValid(email).then(function(validated){
-                    if(validated.success){
+                    if(validated.success && validated.unique){
+
                         console.log("Validated: " + JSON.stringify(validated));    
                         Customer.addCustomer($scope.firstn,$scope.lastn,$scope.email).then(function(added){
                             if(added){
                                 successMessage($scope.firstn,$scope.lastn,$scope.email);
                             }
                             else{
-                                updateStatusMessage(4);
+                                updateStatusMessage(5);
                             }
                         })
+                    }
+                    else if(validated.success && !validated.unique){
+                        updateStatusMessage(4);
                     }
                     else{
                         updateStatusMessage(3);
@@ -48,7 +52,10 @@ angular.module('CustomerCtrl', []).controller('CustomerController', function($sc
     		case 3:
     			$scope.status_msg = "Please contact your manager about getting access to a corporate SevenFifty profile for wholesalers.";
     			break;
-			case 4:
+            case 4:
+                $scope.status_msg = "Sorry, This email is already associated with a buyer in our records.";
+                break;
+			case 5:
 				$scope.status_msg = "Something went wrong when signing you up. Please contact SevenFifty, or try back later!";
 				break;
     	}

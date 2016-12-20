@@ -4,6 +4,7 @@ var db = require('../../config/db.js');
 module.exports.showAllBuyers = function(req,res){
 	//return all of the records in the buyers table
 	const client = new pg.Client(db);
+	client.on('drain', client.end.bind(client));
 	client.connect(function(err){
 		if(!err){
 			client.query('SELECT * FROM buyers',function(err, result){
@@ -45,6 +46,7 @@ module.exports.showAllBuyers = function(req,res){
 module.exports.showAllBlacklist = function(req,res){
 	//return all of the records in the blacklist table
 	const client = new pg.Client(db);
+	client.on('drain', client.end.bind(client));
 	client.connect(function(err){
 		if(!err){
 			client.query('SELECT * FROM blacklist',function(err, result){
@@ -64,8 +66,10 @@ module.exports.showAllBlacklist = function(req,res){
 }
 module.exports.addToBlacklist = function(req,res){
 	newBlacklistDomain = req.body.domain;
+
 	console.log("adding new blacklist domain: " + newBlacklistDomain);
 	const client = new pg.Client(db);
+	client.on('drain', client.end.bind(client));
 	client.connect(function(err){
 		if(!err){
 			client.query('INSERT INTO blacklist(domain) values ($1);',[newBlacklistDomain],function(err, result){
@@ -88,6 +92,7 @@ module.exports.removeFromBlacklist = function(req,res){
 	var domainName = req.body.domain;
 	// console.log(domainID,domainName);
 	const client = new pg.Client(db);
+	client.on('drain', client.end.bind(client));
 	client.connect(function(err){
 		if(!err){
 			client.query('DELETE FROM blacklist WHERE id = ($1) AND domain = ($2)',[domainID,domainName],function(err, result){
